@@ -1,6 +1,6 @@
 const fs = require('fs');
 const inquirer = require("inquirer");
-const {Circle, Square, Triangle} = require(".lib/shapes");
+const {Circle, Square, Triangle} = require("./lib/shapes");
 
 class Svg {
   constructor() {
@@ -26,19 +26,19 @@ const questions = [
   },
   {
     type: "input",
-    name: "text-color",
+    name: "textColor",
     message: "Enter a color keyword (OR a hexadecimal number) for the text color:",
+  },
+  {
+    type: "input",
+    name: "shapeColor",
+    message: "Enter a color keyword (OR a hexadecimal number) for the shape color:"
   },
   {
     type: "list",
     name: "shape",
     message: "Choose which shape you would like?",
     choices: ["Circle", "Square", "Triangle"]
-  },
-  {
-    type: "input",
-    name: "shape-color",
-    message: "Enter a color keyword (OR a hexadecimal number) for the shape color:"
   },
 ]
 
@@ -50,3 +50,46 @@ function writeToFile(fileName, data) {
     console.log('Success')
   })
 }
+
+async function init() {
+  var svgString = "";
+  var svgFile = "logo.svg";
+
+    const answers = await inquirer.prompt(questions);
+
+  var userText = "";
+  if (answers.text.length > 0 && answers.text.length < 4) {
+    userText = answers.text;
+  } else {
+    console.log("Invalid input, Please enter up to 3 Characters");
+      return;
+  }
+
+  userTextColor = answers.textColor;
+  userShape = answers.shape;
+  userShapeColor = answers.shapeColor;
+
+  let newShape;
+  if(userShape === "Circle") {
+    newShape = new Circle();
+
+  } else if (userShape === "Square") {
+    newShape = new Square();
+
+  } else if (userShape === "Triangle") {
+    newShape = new Triangle();
+
+  } else {
+    console.log("Invalid Shape!")
+  }
+  newShape.setColor(userShapeColor);
+
+  var svg = new Svg();
+  svg.setTextElement(userText, userTextColor);
+  svg.setShapeElement(newShape);
+  svgString = svg.render();
+
+  writeToFile(svgFile, svgString);
+}
+
+init()
