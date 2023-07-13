@@ -38,6 +38,8 @@ To run the SVG Shape Generator, follow these steps:
 3. Follow the prompts to enter the desired text, text color, shape color, and shape selection.
 4. After providing the input, the program will generate the SVG image and save it to a file named `logo.svg` in the project directory.
 
+you can find a link to the video [here](https://drive.google.com/file/d/1L3Q_a9A7-DzH17MTnZSAC21_V46DGiAK/view)
+
 ## Testing
 
 The program includes automated tests to ensure the correctness of the shape rendering functionality.
@@ -59,6 +61,7 @@ The program utilizes the following dependencies:
 - [Node.js](https://nodejs.org) - JavaScript runtime environment.
 - [fs](https://nodejs.org/api/fs.html) - Node.js module for file system operations.
 - [inquirer](https://www.npmjs.com/package/inquirer) - Interactive command-line user interface library for Node.js.
+- [jest](https://www.npmjs.com/package/jest) - Node.js library for a suite of unit tests.
 
 ## Contact
 
